@@ -161,6 +161,7 @@ clone_all https://github.com/sbwml/luci-app-mosdns
 clone_all https://github.com/brvphoenix/luci-app-wrtbwmon
 clone_all https://github.com/brvphoenix/wrtbwmon
 clone_all https://github.com/timsaya/luci-app-bandix
+clone_all https://github.com/timsaya/openwrt-bandix
 
 # UU游戏加速器
 clone_dir https://github.com/kiddin9/kwrt-packages luci-app-uugamebooster
