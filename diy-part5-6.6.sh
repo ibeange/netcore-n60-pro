@@ -156,10 +156,11 @@ destination_dir="package/A"
 [ -d $destination_dir ] || mkdir -p $destination_dir
 
 # 添加额外插件
-# clone_all https://github.com/sbwml/luci-app-openlist2
+clone_all https://github.com/sbwml/luci-app-openlist2
 clone_all https://github.com/sbwml/luci-app-mosdns
-# clone_all https://github.com/brvphoenix/luci-app-wrtbwmon
-# clone_all https://github.com/brvphoenix/wrtbwmon
+clone_all https://github.com/brvphoenix/luci-app-wrtbwmon
+clone_all https://github.com/brvphoenix/wrtbwmon
+clone_all https://github.com/timsaya/luci-app-bandix
 
 # UU游戏加速器
 clone_dir https://github.com/kiddin9/kwrt-packages luci-app-uugamebooster
