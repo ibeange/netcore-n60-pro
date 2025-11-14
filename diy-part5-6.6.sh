@@ -198,9 +198,9 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7
 echo
 status "菜单 调整..."
 sed -i 's|/services/|/control/|' feeds/luci/applications/luci-app-wol/root/usr/share/luci/menu.d/luci-app-wol.json
-sed -i 's/services/nas/g' feeds/luci/applications/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
-sed -i '/"title": "Nikki",/a \        "order": -9,' package/waynesg/luci-app-nikki/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
-sed -i 's/("OpenClash"), 50)/("OpenClash"), -10)/g' feeds/luci/applications/luci-app-openclash/luasrc/controller/openclash.lua
+sed -i 's/services/nas/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
+sed -i '/"title": "Nikki",/a \        "order": -9,' package/luci-app-nikki/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
+sed -i 's/("OpenClash"), 50)/("OpenClash"), -10)/g' package/luci-app-openclash/luasrc/controller/openclash.lua
 sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
 sed -i 's/"软件包"/"软件管理"/g' `grep "软件包" -rl ./`
 
@@ -223,7 +223,7 @@ sed -i 's/"软件包"/"软件管理"/g' feeds/luci/modules/luci-base/po/zh_Hans/
 #network
 sed -i 's/"接口"/"网络接口"/g' `grep "接口" -rl ./`
 sed -i 's/DHCP\/DNS/DNS设定/g' feeds/luci/modules/luci-base/po/zh_Hans/base.po
-sed -i 's/"Bandix 流量监控"/"流量监控"/g' package/waynesg/luci-app-bandix/luci-app-bandix/po/zh_Hans/bandix.po
+sed -i 's/"Bandix 流量监控"/"流量监控"/g' package/luci-app-bandix/luci-app-bandix/po/zh_Hans/bandix.po
 
 # 更改 ttyd 顺序和名称
 sed -i '3a \		"order": 10,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
