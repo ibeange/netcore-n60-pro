@@ -152,8 +152,8 @@ git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/gola
 color cy "添加&替换插件"
 
 # 创建插件保存目录
-destination_dir="package/A"
-[ -d $destination_dir ] || mkdir -p $destination_dir
+# destination_dir="package/A"
+# [ -d $destination_dir ] || mkdir -p $destination_dir
 
 # 添加额外插件
 git_clone https://github.com/sbwml/luci-app-openlist2 package/luci-app-openlist2
@@ -161,11 +161,11 @@ git_clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 git_clone https://github.com/brvphoenix/luci-app-wrtbwmon package/luci-app-wrtbwmon
 git_clone https://github.com/brvphoenix/wrtbwmon package/wrtbwmon
 git_clone https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
-git_clone https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
+git_clone https://github.com/timsaya/openwrt-bandix package/luci-app-bandix/openwrt-bandix
 
 # UU游戏加速器
-git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-uugamebooster
-git_clone https://github.com/kiddin9/kwrt-packages package/uugamebooster
+git_clone https://github.com/kiddin9/kwrt-packages/luci-app-uugamebooster package/luci-app-uugamebooster
+git_clone https://github.com/kiddin9/kwrt-packages/uugamebooster package/luci-app-uugamebooster/uugamebooster
 
 # ddns-go 动态域名
 git_clone https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
@@ -182,7 +182,7 @@ git_clone https://github.com/sbwml/luci-app-filemanager package/luci-app-fileman
 # 科学上网插件
 git_clone https://github.com/nikkinikki-org/OpenWrt-nikki package/OpenWrt-nikki
 git_clone https://github.com/vernesong/OpenClash package/luci-app-openclash
-git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-v2ray-server
+git_clone https://github.com/kiddin9/kwrt-packages/luci-app-v2ray-server  package/luci-app-v2ray-server
 
 git_clone https://github.com/jerrykuku/luci-theme-argon
 
