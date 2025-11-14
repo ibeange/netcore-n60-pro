@@ -140,7 +140,7 @@ clone_all() {
 }
 
 # 更新&安装插件
-# begin_time=$(date '+%H:%M:%S')
+begin_time=$(date '+%H:%M:%S')
 # ./scripts/feeds update -a 1>/dev/null 2>&1
 # ./scripts/feeds install -a 1>/dev/null 2>&1
 # status "更新&安装插件"
