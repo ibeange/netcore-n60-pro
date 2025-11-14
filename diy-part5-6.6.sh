@@ -155,36 +155,97 @@ color cy "添加&替换插件"
 # destination_dir="package/A"
 # [ -d $destination_dir ] || mkdir -p $destination_dir
 
-# 添加额外插件
-git_clone https://github.com/sbwml/luci-app-openlist2 package/luci-app-openlist2
-git_clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
-git_clone https://github.com/brvphoenix/luci-app-wrtbwmon package/luci-app-wrtbwmon
-git_clone https://github.com/brvphoenix/wrtbwmon package/wrtbwmon
-git_clone https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
-git_clone https://github.com/timsaya/openwrt-bandix package/luci-app-bandix/openwrt-bandix
+# mosdns
+rm -rf feeds/packages/net/v2ray-geodata
+rm -rf feeds/packages/net/mosdns
+rm -rf feeds/packages/utils/v2dat
+rm -rf feeds/luci/applications/luci-app-mosdns
+find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+find ./ | grep Makefile | grep mosdns | xargs rm -f
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
+sed -i 's/30/2/g' package/mosdns/luci-app-mosdns/root/usr/share/luci/menu.d/*.json
+
+# Fix
+git clone --depth=1 https://github.com/kiddin9/kwrt-packages package/small
+
+# nikki最新版本
+mv package/small/luci-app-nikki package/luci-app-nikki
+mv package/small/nikki package/nikki
+sed -i 's/"title": "Nikki",/&\n        "order": 1,/g' package/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
+
+# timecontrol
+rm -rf feeds/luci/applications/luci-app-timecontrol
+git clone git clone https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
+sed -i 's/"admin", "control"/"admin", "network"/g' package/luci-app-timecontrol/luci-app-nft-timecontrol/luasrc/controller/*.lua
+sed -i 's/firstchild(), "Control", 44/firstchild(), "Network", 99/g' package/luci-app-timecontrol/luci-app-nft-timecontrol/luasrc/controller/*.lua
+
+# openclash
+rm -rf feeds/luci/applications/luci-app-openclash
+mv package/small/luci-app-openclash package/luci-app-openclash
+sed -i 's|("OpenClash"), 50)|("OpenClash"), 3)|g' package/luci-app-openclash/luasrc/controller/*.lua
+
+# v2ray-server
+rm -rf feeds/luci/applications/luci-app-v2ray-server
+mv package/small/luci-app-v2ray-server  package/luci-app-v2ray-server
+# 调整 V2ray服务器 到 VPN 菜单 (修正路径)
+if [ -d "package/luci-app-v2ray-server" ]; then
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/controller/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+fi
+
+# fileassistant
+rm -rf feeds/luci/applications/luci-app-fileassistant
+mv package/small/luci-app-fileassistant package/luci-app-fileassistant
+
+# netdata
+rm -rf feeds/luci/applications/luci-app-netdata
+mv package/small/luci-app-netdata feeds/luci/applications/luci-app-netdata
+
+# wrtbwmon
+rm -rf feeds/luci/applications/luci-app-wrtbwmon
+mv package/small/wrtbwmon package/wrtbwmon
+mv package/small/luci-app-wrtbwmon package/luci-app-wrtbwmon
+
+# ddns-go
+rm -rf feeds/packages/net/ddns-go
+rm -rf feeds/luci/applications/luci-app-ddns-go
+git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/ddnsgo
 
 # UU游戏加速器
-git_clone https://github.com/kiddin9/kwrt-packages/luci-app-uugamebooster package/luci-app-uugamebooster
-git_clone https://github.com/kiddin9/kwrt-packages/uugamebooster package/luci-app-uugamebooster/uugamebooster
+rm -rf feeds/packages/net/uugamebooster
+rm -rf feeds/luci/applications/luci-app-uugamebooster
+mv package/small/uugamebooster package/uugamebooster
+mv package/small/luci-app-uugamebooster package/luci-app-uugamebooster
 
-# ddns-go 动态域名
-git_clone https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
+# openlist2
+rm -rf feeds/packages/net/openlist
+rm -rf feeds/luci/applications/luci-app-openlist
+git clone https://github.com/OpenListTeam/OpenList-OpenWRT package/openlist
+sed -i 's/services/nas/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
+sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
+
+# bandix
+rm -rf feeds/packages/net/openwrt-bandix
+rm -rf feeds/luci/applications/luci-app-bandix
+git clone --depth=1 https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
+git clone --depth=1 https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
 
 # 关机
-git_clone https://github.com/sirpdboy/luci-app-poweroffdevice package/luci-app-poweroffdevice
+rm -rf feeds/luci/applications/luci-app-poweroffdevice
+git clone --depth=1 https://github.com/sirpdboy/luci-app-poweroffdevice package/luci-app-poweroffdevice
 
 # luci-app-filemanager
-git_clone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
+rm -rf feeds/luci/applications/luci-app-filemanager
+gitclone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
 
 # 添加 Turbo ACC 网络加速
 # git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-turboacc
 
-# 科学上网插件
-git_clone https://github.com/nikkinikki-org/OpenWrt-nikki package/OpenWrt-nikki
-git_clone https://github.com/vernesong/OpenClash package/luci-app-openclash
-git_clone https://github.com/kiddin9/kwrt-packages/luci-app-v2ray-server  package/luci-app-v2ray-server
-
-git_clone https://github.com/jerrykuku/luci-theme-argon
+# argon主题
+rm -rf feeds/luci/themes/luci-theme-argon
+git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # 更改默认 Shell 为 zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
@@ -198,13 +259,8 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7
 echo
 status "菜单 调整..."
 sed -i 's|/services/|/control/|' feeds/luci/applications/luci-app-wol/root/usr/share/luci/menu.d/luci-app-wol.json
-sed -i 's/services/nas/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
-sed -i '/"title": "Nikki",/a \        "order": -9,' package/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json
-sed -i 's/("OpenClash"), 50)/("OpenClash"), -10)/g' package/luci-app-openclash/luasrc/controller/openclash.lua
 sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
 sed -i 's/"软件包"/"软件管理"/g' `grep "软件包" -rl ./`
-
-# 重命名
 sed -i 's,UPnP IGD 和 PCP,UPnP,g' feeds/luci/applications/luci-app-upnp/po/zh_Hans/upnp.po
         
 status "插件 重命名..."
@@ -229,18 +285,18 @@ sed -i 's/"Bandix 流量监控"/"流量监控"/g' package/luci-app-bandix/po/zh_
 sed -i '3a \		"order": 10,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
 sed -i 's/"终端"/"命令终端"/g' feeds/luci/applications/luci-app-ttyd/po/zh_Hans/ttyd.po
 
-# 调整 V2ray服务器 到 VPN 菜单 (修正路径)
-if [ -d "package/luci-app-v2ray-server" ]; then
-    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/controller/*.lua
-    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
-    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
-fi
-
 # Modify default IP
 sed -i 's/192.168.6.1/192.168.50.1/g' package/base-files/files/bin/config_generate
 
 # Modify default theme
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+
+# 修改 wifi 无线名称
+sed -i "s/ImmortalWrt/OpenWrt/g" package/network/config/wifi-scripts/files/lib/wifi/mac80211.uc
+
+# 修改 wifi 无线名称 & 密码
+sed -i "s/BASE_SSID='.*'/BASE_SSID='OpenWrt'/g" target/linux/qualcommax/base-files/etc/uci-defaults/990_set-wireless.sh
+sed -i "s/BASE_WORD='.*'/BASE_WORD='password'/g" target/linux/qualcommax/base-files/etc/uci-defaults/990_set-wireless.sh
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
