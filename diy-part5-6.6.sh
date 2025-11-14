@@ -223,7 +223,7 @@ sed -i 's/"软件包"/"软件管理"/g' feeds/luci/modules/luci-base/po/zh_Hans/
 #network
 sed -i 's/"接口"/"网络接口"/g' `grep "接口" -rl ./`
 sed -i 's/DHCP\/DNS/DNS设定/g' feeds/luci/modules/luci-base/po/zh_Hans/base.po
-sed -i 's/"Bandix 流量监控"/"流量监控"/g' package/luci-app-bandix/luci-app-bandix/po/zh_Hans/bandix.po
+sed -i 's/"Bandix 流量监控"/"流量监控"/g' package/luci-app-bandix/po/zh_Hans/bandix.po
 
 # 更改 ttyd 顺序和名称
 sed -i '3a \		"order": 10,' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
