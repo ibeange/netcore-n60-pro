@@ -229,8 +229,8 @@ sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/openlist/luci-a
 # bandix
 rm -rf feeds/packages/net/openwrt-bandix
 rm -rf feeds/luci/applications/luci-app-bandix
-git clone --depth=1 https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
-git clone --depth=1 https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
+mv package/small/openwrt-bandix package/openwrt-bandix
+mv package/small/luci-app-bandix package/luci-app-bandix
 
 # 关机
 rm -rf feeds/luci/applications/luci-app-poweroffdevice
@@ -293,10 +293,6 @@ sed -i 's/192.168.6.1/192.168.50.1/g' package/base-files/files/bin/config_genera
 
 # 修改 wifi 无线名称
 sed -i "s/ImmortalWrt/OpenWrt/g" package/network/config/wifi-scripts/files/lib/wifi/mac80211.uc
-
-# 修改 wifi 无线名称 & 密码
-sed -i "s/BASE_SSID='.*'/BASE_SSID='OpenWrt'/g" target/linux/qualcommax/base-files/etc/uci-defaults/990_set-wireless.sh
-sed -i "s/BASE_WORD='.*'/BASE_WORD='password'/g" target/linux/qualcommax/base-files/etc/uci-defaults/990_set-wireless.sh
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
