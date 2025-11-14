@@ -176,7 +176,7 @@ sed -i 's/"title": "Nikki",/&\n        "order": 1,/g' package/luci-app-nikki/roo
 
 # timecontrol
 rm -rf feeds/luci/applications/luci-app-timecontrol
-git clone git clone https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
+git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
 sed -i 's/"admin", "control"/"admin", "network"/g' package/luci-app-timecontrol/luci-app-nft-timecontrol/luasrc/controller/*.lua
 sed -i 's/firstchild(), "Control", 44/firstchild(), "Network", 99/g' package/luci-app-timecontrol/luci-app-nft-timecontrol/luasrc/controller/*.lua
 
@@ -238,7 +238,7 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-poweroffdevice package/
 
 # luci-app-filemanager
 rm -rf feeds/luci/applications/luci-app-filemanager
-gitclone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
+git clone --depth=1 https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
 
 # 添加 Turbo ACC 网络加速
 # git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-turboacc
