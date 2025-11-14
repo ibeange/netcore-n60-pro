@@ -156,33 +156,33 @@ destination_dir="package/A"
 [ -d $destination_dir ] || mkdir -p $destination_dir
 
 # 添加额外插件
-clone_all https://github.com/sbwml/luci-app-openlist2
-clone_all https://github.com/sbwml/luci-app-mosdns
-clone_all https://github.com/brvphoenix/luci-app-wrtbwmon
-clone_all https://github.com/brvphoenix/wrtbwmon
-clone_all https://github.com/timsaya/luci-app-bandix
-clone_all https://github.com/timsaya/openwrt-bandix
+clone_all https://github.com/sbwml/luci-app-openlist2 package/luci-app-openlist2
+clone_all https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
+clone_all https://github.com/brvphoenix/luci-app-wrtbwmon package/luci-app-wrtbwmon
+clone_all https://github.com/brvphoenix/wrtbwmon package/wrtbwmon
+clone_all https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
+clone_all https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
 
 # UU游戏加速器
-clone_dir https://github.com/kiddin9/kwrt-packages luci-app-uugamebooster
-clone_dir https://github.com/kiddin9/kwrt-packages uugamebooster
+clone_dir https://github.com/kiddin9/kwrt-packages package/luci-app-uugamebooster
+clone_dir https://github.com/kiddin9/kwrt-packages package/uugamebooster
 
 # ddns-go 动态域名
-clone_all https://github.com/sirpdboy/luci-app-ddns-go
+clone_all https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
 
 # 关机
-clone_all https://github.com/sirpdboy/luci-app-poweroffdevice
+clone_all https://github.com/sirpdboy/luci-app-poweroffdevice package/luci-app-poweroffdevice
 
 # luci-app-filemanager
-git_clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager
+git_clone https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
 
 # 添加 Turbo ACC 网络加速
-# git_clone https://github.com/kiddin9/kwrt-packages luci-app-turboacc
+# git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-turboacc
 
 # 科学上网插件
-clone_all https://github.com/nikkinikki-org/OpenWrt-nikki
-clone_dir https://github.com/vernesong/OpenClash luci-app-openclash
-clone_dir https://github.com/kiddin9/kwrt-packages luci-app-v2ray-server
+clone_all https://github.com/nikkinikki-org/OpenWrt-nikki package/OpenWrt-nikki
+clone_dir https://github.com/vernesong/OpenClash package/luci-app-openclash
+clone_dir https://github.com/kiddin9/kwrt-packages package/luci-app-v2ray-server
 
 git_clone https://github.com/jerrykuku/luci-theme-argon
 
@@ -230,14 +230,14 @@ sed -i '3a \		"order": 10,' feeds/luci/applications/luci-app-ttyd/root/usr/share
 sed -i 's/"终端"/"命令终端"/g' feeds/luci/applications/luci-app-ttyd/po/zh_Hans/ttyd.po
 
 # 调整 V2ray服务器 到 VPN 菜单 (修正路径)
-if [ -d "package/A/luci-app-v2ray-server" ]; then
-    sed -i 's/services/vpn/g' package/A/luci-app-v2ray-server/luasrc/controller/*.lua
-    sed -i 's/services/vpn/g' package/A/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
-    sed -i 's/services/vpn/g' package/A/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+if [ -d "package/luci-app-v2ray-server" ]; then
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/controller/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 fi
 
 # Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.6.1/192.168.50.1/g' package/base-files/files/bin/config_generate
 
 # Modify default theme
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
