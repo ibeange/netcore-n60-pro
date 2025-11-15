@@ -222,12 +222,12 @@ mv package/small/uugamebooster package/uugamebooster
 mv package/small/luci-app-uugamebooster package/luci-app-uugamebooster
 
 # openlist2
-# rm -rf feeds/packages/net/openlist2
-# rm -rf feeds/luci/applications/luci-app-openlist2
-# mv package/small/openlist2 package/openlist2
-# mv package/small/luci-app-openlist2 package/luci-app-openlist2
-# sed -i 's/services/nas/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
-# sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
+rm -rf feeds/packages/net/openlist2
+rm -rf feeds/luci/applications/luci-app-openlist2
+mv package/small/openlist2 package/openlist2
+mv package/small/luci-app-openlist2 package/luci-app-openlist2
+sed -i 's/services/nas/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
+sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/luci-app-openlist2/root/usr/share/luci/menu.d/luci-app-openlist2.json
 
 # bandix
 rm -rf feeds/packages/net/openwrt-bandix
@@ -299,6 +299,19 @@ sed -i "s/ImmortalWrt/OpenWrt/g" package/network/config/wifi-scripts/files/lib/w
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+
+# 显示增加编译时间
+Build_Date=R`date "+%y.%m.%d"`
+sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION=\"ImmortalWrt By Ethan\"/g" package/base-files/files/etc/openwrt_release
+sed -i "s/OPENWRT_RELEASE=.*/OPENWRT_RELEASE=\"ImmortalWrt R$(TZ=UTC-8 date +'%y.%-m.%-d') (By Ethan build $(TZ=UTC-8 date '+%Y-%m-%d %H:%M'))\"/g" package/base-files/files/usr/lib/os-release
+sed -i '/exit 0/i\sed -i "s\/DISTRIB_REVISION=.*\/DISTRIB_REVISION='"'ImmortalWrt R$(TZ=UTC-8 date +'%y.%-m.%-d') (By Ethan build)'"'\/g" \/etc\/openwrt_release' package/emortal/default-settings/files/99-default-settings
+sed -i '/exit 0/i\sed -i "s\/DISTRIB_DESCRIPTION=.*\/DISTRIB_DESCRIPTION='"'ImmortalWrt By Ethan'"'\/g" \/etc\/openwrt_release\n' package/emortal/default-settings/files/99-default-settings
+
+# 修改本地时间格式
+sed -i 's/os.date()/os.date("%a %Y-%m-%d %H:%M:%S")/g' package/emortal/autocore/files/*/index.htm
+
+# 最大连接数修改为65535
+sed -i '$a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 
 find package/*/ -maxdepth 2 -name "luci-app-netdata" | xargs -i sed -i 's/netdata-ssl/netdata/g' {}/Makefile
 
