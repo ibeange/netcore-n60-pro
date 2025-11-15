@@ -201,7 +201,9 @@ mv package/small/luci-app-fileassistant package/luci-app-fileassistant
 
 # netdata
 rm -rf feeds/luci/applications/luci-app-netdata
-mv package/small/luci-app-netdata feeds/luci/applications/luci-app-netdata
+rm -rf feeds/packages/net/netdata
+git clone https://github.com/muink/openwrt-netdata-ssl package/netdata
+mv package/small/luci-app-netdata package/luci-app-netdata
 
 # wrtbwmon
 rm -rf feeds/luci/applications/luci-app-wrtbwmon
@@ -297,6 +299,8 @@ sed -i "s/ImmortalWrt/OpenWrt/g" package/network/config/wifi-scripts/files/lib/w
 
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+
+find package/*/ -maxdepth 2 -name "luci-app-netdata" | xargs -i sed -i 's/netdata-ssl/netdata/g' {}/Makefile
 
 # 添加组播防火墙规则
 cat >> package/network/config/firewall/files/firewall.config <<EOF
