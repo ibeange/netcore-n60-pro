@@ -200,7 +200,7 @@ rm -rf feeds/luci/applications/luci-app-fileassistant
 mv package/small/luci-app-fileassistant package/luci-app-fileassistant
 
 # netdata
-rm -rf feeds/luci/applications/luci-app-netdata
+rm -rf package/feeds/luci/luci-app-netdata
 rm -rf feeds/packages/net/netdata
 git clone https://github.com/muink/openwrt-netdata-ssl package/netdata
 mv package/small/luci-app-netdata package/luci-app-netdata
