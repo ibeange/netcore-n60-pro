@@ -223,10 +223,9 @@ mv package/small/luci-app-uugamebooster package/luci-app-uugamebooster
 
 # openlist2
 rm -rf feeds/luci/applications/luci-app-openlist
-git clone https://github.com/OpenListTeam/OpenList-OpenWRT package/luci-app-openlist
+git clone --depth=1 https://github.com/OpenListTeam/OpenList-OpenWRT package/luci-app-openlist
 sed -i 's/services/nas/g' package/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
 sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
-
 # bandix
 rm -rf feeds/packages/net/openwrt-bandix
 rm -rf feeds/luci/applications/luci-app-bandix
