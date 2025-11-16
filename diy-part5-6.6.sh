@@ -245,11 +245,13 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-poweroffdevice package/
 rm -rf feeds/luci/applications/luci-app-turboacc
 mv package/small/luci-app-turboacc package/luci-app-turboacc
 
-# mesh & guest_wifi
+# mesh & guest_wifi & eqosplus
 rm -rf feeds/luci/applications/luci-app-easymesh
 rm -rf feeds/luci/applications/luci-app-guest-wifi
+rm -rf feeds/luci/applications/luci-app-eqosplus
 mv package/small/luci-app-guest-wifi package/luci-app-guest-wifi
 mv package/small/luci-app-easymesh package/luci-app-easymesh
+mv package/small/luci-app-eqosplus package/luci-app-eqosplus
 
 # argon主题
 rm -rf feeds/luci/themes/luci-theme-argon
