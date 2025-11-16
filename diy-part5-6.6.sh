@@ -196,14 +196,14 @@ if [ -d "package/luci-app-v2ray-server" ]; then
 fi
 
 # fileassistant
-rm -rf feeds/luci/applications/luci-app-fileassistant
-mv package/small/luci-app-fileassistant package/luci-app-fileassistant
+# rm -rf feeds/luci/applications/luci-app-fileassistant
+# mv package/small/luci-app-fileassistant package/luci-app-fileassistant
 
 # netdata
-rm -rf package/feeds/luci/luci-app-netdata
-rm -rf feeds/packages/net/netdata
-git clone https://github.com/muink/openwrt-netdata-ssl package/netdata
-mv package/small/luci-app-netdata package/luci-app-netdata
+# rm -rf package/feeds/luci/luci-app-netdata
+# rm -rf feeds/packages/net/netdata
+# git clone https://github.com/muink/openwrt-netdata-ssl package/netdata
+# mv package/small/luci-app-netdata package/luci-app-netdata
 
 # wrtbwmon
 rm -rf feeds/luci/applications/luci-app-wrtbwmon
@@ -216,16 +216,17 @@ rm -rf feeds/luci/applications/luci-app-ddns-go
 git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/ddnsgo
 
 # UU游戏加速器
-rm -rf feeds/packages/net/uugamebooster
-rm -rf feeds/luci/applications/luci-app-uugamebooster
-mv package/small/uugamebooster package/uugamebooster
-mv package/small/luci-app-uugamebooster package/luci-app-uugamebooster
+# rm -rf feeds/packages/net/uugamebooster
+# rm -rf feeds/luci/applications/luci-app-uugamebooster
+# mv package/small/uugamebooster package/uugamebooster
+# mv package/small/luci-app-uugamebooster package/luci-app-uugamebooster
 
 # openlist2
-rm -rf feeds/luci/applications/luci-app-openlist
-git clone --depth=1 https://github.com/OpenListTeam/OpenList-OpenWRT package/openlist
-sed -i 's/services/nas/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
-sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
+# rm -rf feeds/luci/applications/luci-app-openlist
+# git clone --depth=1 https://github.com/OpenListTeam/OpenList-OpenWRT package/openlist
+# sed -i 's/services/nas/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
+# sed -i 's/"title": "OpenList",/&\n        "order": 0,/g' package/openlist/luci-app-openlist/root/usr/share/luci/menu.d/luci-app-openlist.json
+
 # bandix
 rm -rf feeds/packages/net/openwrt-bandix
 rm -rf feeds/luci/applications/luci-app-bandix
@@ -237,11 +238,18 @@ rm -rf feeds/luci/applications/luci-app-poweroffdevice
 git clone --depth=1 https://github.com/sirpdboy/luci-app-poweroffdevice package/luci-app-poweroffdevice
 
 # luci-app-filemanager
-rm -rf feeds/luci/applications/luci-app-filemanager
-git clone --depth=1 https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
+# rm -rf feeds/luci/applications/luci-app-filemanager
+# git clone --depth=1 https://github.com/sbwml/luci-app-filemanager package/luci-app-filemanager
 
 # 添加 Turbo ACC 网络加速
-# git_clone https://github.com/kiddin9/kwrt-packages package/luci-app-turboacc
+rm -rf feeds/luci/applications/luci-app-turboacc
+mv package/small/luci-app-turboacc package/luci-app-turboacc
+
+# mesh & guest_wifi
+rm -rf feeds/luci/applications/luci-app-easymesh
+rm -rf feeds/luci/applications/luci-app-guest-wifi
+mv package/small/luci-app-guest-wifi package/luci-app-guest-wifi
+mv package/small/luci-app-easymesh package/luci-app-easymesh
 
 # argon主题
 rm -rf feeds/luci/themes/luci-theme-argon
