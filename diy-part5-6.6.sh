@@ -149,6 +149,9 @@ color cr "更换golang版本"
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
+# 移除 ebtables 目录，确保不编译
+rm -rf package/network/utils/ebtables
+
 color cy "添加&替换插件"
 
 # 创建插件保存目录
