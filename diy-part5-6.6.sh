@@ -203,8 +203,9 @@ fi
 # mv package/small/luci-app-fileassistant package/luci-app-fileassistant
 
 # netdata
-# rm -rf package/feeds/luci/luci-app-netdata
-# rm -rf feeds/packages/net/netdata
+rm -rf package/feeds/luci/luci-app-netdata
+rm -rf feeds/packages/net/netdata
+git clone --depth=1 https://github.com/sirpdboy/luci-app-netdata package/luci-app-netdata
 # git clone https://github.com/muink/openwrt-netdata-ssl package/netdata
 # mv package/small/luci-app-netdata package/luci-app-netdata
 
@@ -255,10 +256,15 @@ rm -rf feeds/luci/applications/luci-app-eqosplus
 mv package/small/luci-app-guest-wifi package/luci-app-guest-wifi
 mv package/small/luci-app-easymesh package/luci-app-easymesh
 mv package/small/luci-app-eqosplus package/luci-app-eqosplus
+if [ -d "package/luci-app-eqosplus" ]; then
+    sed -i 's/services/vpn/g' package/luci-app-eqosplus/luasrc/controller/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-eqosplus/luasrc/model/cbi/*.lua
+    sed -i 's/services/vpn/g' package/luci-app-eqosplus/luasrc/view/eqosplus/*.htm
+fi
 
 # argon主题
 rm -rf feeds/luci/themes/luci-theme-argon
-git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon package/luci-theme-argon
 
 # 更改默认 Shell 为 zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
@@ -323,7 +329,7 @@ sed -i '/exit 0/i\sed -i "s\/DISTRIB_DESCRIPTION=.*\/DISTRIB_DESCRIPTION='"'Immo
 # 最大连接数修改为65535
 sed -i '$a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 
-find package/*/ -maxdepth 2 -name "luci-app-netdata" | xargs -i sed -i 's/netdata-ssl/netdata/g' {}/Makefile
+# find package/*/ -maxdepth 2 -name "luci-app-netdata" | xargs -i sed -i 's/netdata-ssl/netdata/g' {}/Makefile
 
 # 添加组播防火墙规则
 cat >> package/network/config/firewall/files/firewall.config <<EOF
