@@ -198,9 +198,9 @@ if [ -d "package/luci-app-v2ray-server" ]; then
     sed -i 's/services/vpn/g' package/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
 fi
 
-# fileassistant
-# rm -rf feeds/luci/applications/luci-app-fileassistant
-# mv package/small/luci-app-fileassistant package/luci-app-fileassistant
+
+# luci-app-filemanager
+git_clone https://github.com/sbwml/luci-app-filemanager luci-app-filemanager
 
 # netdata
 rm -rf package/feeds/luci/luci-app-netdata
